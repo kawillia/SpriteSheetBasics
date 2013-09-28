@@ -108,8 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoadingSprite.cs" />
-    <Compile Include="SingleRowSpriteSheet.cs" />
-    <Compile Include="MultiRowSpriteSheet.cs" />
+    <Compile Include="SingleRowSprite.cs" />
+    <Compile Include="MultiRowSprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SpriteSheetBasicsGame.cs" />

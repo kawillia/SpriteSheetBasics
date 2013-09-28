@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace SpriteSheetBasics
 {
-    public class LoadingSprite : SingleRowSpriteSheet
+    public class LoadingSprite : SingleRowSprite
     {
-        public LoadingSprite(ContentManager content, SpriteBatch spriteBatch, Vector2 position)
-            : base(content.Load<Texture2D>("loading"), spriteBatch, position)
+        public LoadingSprite(ContentManager content, SpriteBatch spriteBatch)
+            : base(content.Load<Texture2D>("loading"), spriteBatch)
         {
             numberOfFrames = 10;
             spriteWidth = 72;

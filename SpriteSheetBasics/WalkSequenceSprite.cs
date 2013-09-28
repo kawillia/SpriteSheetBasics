@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace SpriteSheetBasics
 {
-    public class WalkSequenceSprite : MultiRowSpriteSheet
+    public class WalkSequenceSprite : MultiRowSprite
     {
-        public WalkSequenceSprite(ContentManager content, SpriteBatch spriteBatch, Vector2 position)
-            : base(content.Load<Texture2D>("walksequence"), spriteBatch, position)
+        public WalkSequenceSprite(ContentManager content, SpriteBatch spriteBatch)
+            : base(content.Load<Texture2D>("walksequence"), spriteBatch)
         {
             numberOfHorizontalFrames = 6;
             numberOfVerticalFrames = 5;

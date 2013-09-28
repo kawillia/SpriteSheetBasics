@@ -15,20 +15,29 @@ namespace SpriteSheetBasics
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private SingleRowSpriteSheet loadingSprite;
-        private MultiRowSpriteSheet multiRowSpriteSheet;
+        private LoadingSprite loadingSprite;
+        private WalkSequenceSprite walkSequenceSprite;
 
         public SpriteSheetBasicsGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            loadingSprite = new LoadingSprite(Content, spriteBatch, new Vector2(700, 400));
-            multiRowSpriteSheet = new WalkSequenceSprite(Content, spriteBatch, new Vector2(380, 200));
+            loadingSprite = new LoadingSprite(Content, spriteBatch);
+            loadingSprite.Position = new Vector2(
+                graphics.PreferredBackBufferWidth - loadingSprite.SpriteWidth - 10,
+                graphics.PreferredBackBufferHeight - loadingSprite.SpriteHeight - 10);
+
+            walkSequenceSprite = new WalkSequenceSprite(Content, spriteBatch);
+            walkSequenceSprite.Position = new Vector2(
+                (graphics.PreferredBackBufferWidth / 2) - (walkSequenceSprite.SpriteWidth / 2),
+                (graphics.PreferredBackBufferHeight / 2) - (walkSequenceSprite.SpriteHeight / 2));
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,7 +46,7 @@ namespace SpriteSheetBasics
                 this.Exit();
 
             loadingSprite.Update(gameTime);
-            multiRowSpriteSheet.Update(gameTime);
+            walkSequenceSprite.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -47,7 +56,7 @@ namespace SpriteSheetBasics
 
             spriteBatch.Begin();
             loadingSprite.Draw();
-            multiRowSpriteSheet.Draw();
+            walkSequenceSprite.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

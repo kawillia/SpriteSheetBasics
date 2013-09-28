@@ -8,8 +8,12 @@ using Microsoft.Xna.Framework;
 
 namespace SpriteSheetBasics
 {
-    public abstract class MultiRowSpriteSheet
+    public abstract class MultiRowSprite
     {
+        public Vector2 Position { get; set; }
+        public Int32 SpriteWidth { get { return spriteWidth; } }
+        public Int32 SpriteHeight { get { return spriteHeight; } }
+
         protected Int32 numberOfHorizontalFrames;
         protected Int32 numberOfVerticalFrames;
         protected Int32 spriteWidth;
@@ -18,18 +22,18 @@ namespace SpriteSheetBasics
 
         private Texture2D sprite;
         private SpriteBatch spriteBatch;
-        private Vector2 position;
         private Single timer = 0f;        
         private Int32 currentHorizontalFrame = 1; 
         private Int32 currentVerticalFrame = 1;
         private Rectangle sourceRect;
-        private Vector2 origin;
 
-        public MultiRowSpriteSheet(Texture2D sprite, SpriteBatch spriteBatch, Vector2 position)
+        public MultiRowSprite(Texture2D sprite, SpriteBatch spriteBatch) : this(sprite, spriteBatch, Vector2.Zero) { }
+
+        public MultiRowSprite(Texture2D sprite, SpriteBatch spriteBatch, Vector2 position)
         {
             this.sprite = sprite;
             this.spriteBatch = spriteBatch;
-            this.position = position;
+            this.Position = position;
         }
 
         public void Update(GameTime gameTime)
@@ -55,12 +59,11 @@ namespace SpriteSheetBasics
             }
 
             sourceRect = new Rectangle(currentHorizontalFrame * spriteWidth, currentVerticalFrame * spriteHeight, spriteWidth, spriteHeight);
-            origin = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
         }
 
         public void Draw()
         {
-            spriteBatch.Draw(sprite, new Vector2(position.X, position.Y), sourceRect, Color.White, 0f, origin, 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(sprite, new Vector2(Position.X, Position.Y), sourceRect, Color.White, 0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0);
         }
     }
 }
