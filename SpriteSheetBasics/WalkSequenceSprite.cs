@@ -10,8 +10,8 @@ namespace SpriteSheetBasics
 {
     public class WalkSequenceSprite : MultiRowSprite
     {
-        public WalkSequenceSprite(ContentManager content, SpriteBatch spriteBatch)
-            : base(content.Load<Texture2D>("walksequence"), spriteBatch)
+        public WalkSequenceSprite(Game game, ContentManager content, SpriteBatch spriteBatch)
+            : base(game, content.Load<Texture2D>("walksequence"), spriteBatch)
         {
             numberOfHorizontalFrames = 6;
             numberOfVerticalFrames = 5;

@@ -22,12 +22,12 @@ namespace SpriteSheetBasics
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            loadingSprite = new LoadingSprite(Content, spriteBatch);
+            loadingSprite = new LoadingSprite(this, Content, spriteBatch);
             loadingSprite.Position = new Vector2(
                 graphics.PreferredBackBufferWidth - loadingSprite.SpriteWidth - 10,
                 graphics.PreferredBackBufferHeight - loadingSprite.SpriteHeight - 10);
 
-            walkSequenceSprite = new WalkSequenceSprite(Content, spriteBatch);
+            walkSequenceSprite = new WalkSequenceSprite(this, Content, spriteBatch);
             walkSequenceSprite.Position = new Vector2(
                 (graphics.PreferredBackBufferWidth / 2) - (walkSequenceSprite.SpriteWidth / 2),
                 (graphics.PreferredBackBufferHeight / 2) - (walkSequenceSprite.SpriteHeight / 2));
@@ -47,9 +47,18 @@ namespace SpriteSheetBasics
         {
             graphics.GraphicsDevice.Clear(Color.Black);
 
+            var spriteFont = Content.Load<SpriteFont>("Font");
+            var loadingText = "Loading...";
+            var loadingTextSize = spriteFont.MeasureString(loadingText);
+            var loadingTextPosition =
+                loadingSprite.Position -
+                new Vector2(loadingTextSize.X + 10, -loadingSprite.SpriteHeight / 2) -
+                new Vector2(0, loadingTextSize.Y / 2);
+
             spriteBatch.Begin();
-            loadingSprite.Draw();
-            walkSequenceSprite.Draw();
+            spriteBatch.DrawString(spriteFont, loadingText, loadingTextPosition, Color.White);
+            loadingSprite.Draw(gameTime);
+            walkSequenceSprite.Draw(gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);

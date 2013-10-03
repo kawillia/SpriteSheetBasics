@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace SpriteSheetBasics
 {
-    public abstract class SingleRowSprite
+    public abstract class SingleRowSprite : DrawableGameComponent
     {
         public Vector2 Position { get; set; }
         public Int32 SpriteWidth { get { return spriteWidth; } }
@@ -25,17 +25,19 @@ namespace SpriteSheetBasics
         private Int32 currentFrame = 1;        
         private Rectangle sourceRect;
 
-        public SingleRowSprite(Texture2D sprite, SpriteBatch spriteBatch) : this(sprite, spriteBatch, Vector2.Zero) { }
+        public SingleRowSprite(Game game, Texture2D sprite, SpriteBatch spriteBatch) : this(game, sprite, spriteBatch, Vector2.Zero) { }
 
-        public SingleRowSprite(Texture2D sprite, SpriteBatch spriteBatch, Vector2 position)
+        public SingleRowSprite(Game game, Texture2D sprite, SpriteBatch spriteBatch, Vector2 position) : base(game)
         {
             this.sprite = sprite;
             this.spriteBatch = spriteBatch;
             this.Position = position;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             timer += (Single)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (timer > interval)
@@ -50,8 +52,9 @@ namespace SpriteSheetBasics
             sourceRect = new Rectangle(currentFrame * spriteWidth, 0, spriteWidth, spriteHeight);
         }
 
-        public void Draw()
+        public override void Draw(GameTime gameTime)
         {
+            base.Draw(gameTime);
             spriteBatch.Draw(sprite, new Vector2(Position.X, Position.Y), sourceRect, Color.White, 0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0);
         }
     }

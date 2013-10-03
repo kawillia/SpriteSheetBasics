@@ -10,12 +10,12 @@ namespace SpriteSheetBasics
 {
     public class LoadingSprite : SingleRowSprite
     {
-        public LoadingSprite(ContentManager content, SpriteBatch spriteBatch)
-            : base(content.Load<Texture2D>("loading"), spriteBatch)
+        public LoadingSprite(Game game, ContentManager content, SpriteBatch spriteBatch)
+            : base(game, content.Load<Texture2D>("loading"), spriteBatch)
         {
             numberOfFrames = 10;
-            spriteWidth = 72;
-            spriteHeight = 72;
+            spriteWidth = 36;
+            spriteHeight = 36;
             interval = 100f;
         }
     }
